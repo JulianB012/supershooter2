@@ -28,10 +28,15 @@ game.setScore(0)
 game.setLife(5)
 basic.forever(function () {
     basic.pause(200)
-    enemy.move(1)
-    basic.pause(100)
-    enemy.move(randint(1, -1))
+    enemy.move(randint(2, -2))
     enemy.ifOnEdgeBounce()
+    basic.pause(100)
+    if (enemy.get(LedSpriteProperty.X) > ship.get(LedSpriteProperty.X)) {
+        enemy.change(LedSpriteProperty.X, -1)
+    }
+    if (enemy.get(LedSpriteProperty.X) < ship.get(LedSpriteProperty.X)) {
+        enemy.change(LedSpriteProperty.X, 1)
+    }
     if (randint(0, 4) == 0) {
         enemybullet = game.createSprite(enemy.get(LedSpriteProperty.X), 0)
         enemybullet.turn(Direction.Left, 270)
